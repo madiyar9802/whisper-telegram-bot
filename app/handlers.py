@@ -30,7 +30,7 @@ async def handle_audio(message: Message):
     file_id = message.audio.file_id
     file = await bot.get_file(file_id)
     file_path = file.file_path
-    file_on_disc = f"C:\\Users\\Madiyar\\OneDrive\\Рабочий стол\\Рандомные проекты на питоне\\Новый телеграм бот\\app\\{message.message_id}audio.mp3"
+    file_on_disc = f"{getenv('file_path')}{str(message.message_id)}"
     await bot.download_file(file_path, file_on_disc)
     await message.reply(speech_recognition(file_on_disc))
     try:
