@@ -4,7 +4,10 @@ from os import remove
 
 
 def speech_recognition(file, model='medium'):
-    speech_model = whisper.load_model(model, device=torch.device('cuda'))
+    if torch.cuda.is_available():
+        speech_model = whisper.load_model(model, device=torch.device('cuda'))
+    else:
+        speech_model = whisper.load_model(model)
     if file == None:
         return 'Не удалось транскрибировать аудио'
     else:
