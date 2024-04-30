@@ -6,7 +6,7 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from dotenv import load_dotenv
 
-# Загрузка переменных среды из файла .env
+# Загрузка переменных из файла .env
 load_dotenv()
 
 router = Router()
