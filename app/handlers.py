@@ -1,5 +1,5 @@
 import app.keyboard as kb
-from os import remove, getenv
+from os import getenv
 from app.audio import speech_recognition
 from aiogram import F, Router, Bot
 from aiogram.filters import CommandStart, Command
