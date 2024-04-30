@@ -1,5 +1,6 @@
 import torch
 import whisper
+from os import remove
 
 
 def speech_recognition(file, model='medium'):
@@ -12,6 +13,7 @@ def speech_recognition(file, model='medium'):
     # Если нужно сохранить текст в .txt
     # with open(f'transcription_{model}.txt', 'w') as file:
     #     file.write(result['text'])
+    remove(file)
 
     # Возвращаем результат
     return result['text']

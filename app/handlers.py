@@ -15,14 +15,14 @@ bot = Bot(token=getenv('TOKEN'))
 
 @router.message(CommandStart())
 async def cmd_start(message: Message):
-    await message.answer('Привет! Пожалуйста, отправьте голосовое сообщение или аудиофайл для обработки.',
+    await message.answer(f'Привет {message.from_user.first_name}!\n\nПожалуйста, отправь голосовое сообщение или аудиофайл для обработки.',
                          reply_markup=kb.main)
 
 
 @router.message(Command('help'))
 async def get_help(message: Message):
     await message.answer(
-        'Этот бот преобразует аудиозаписи и голосовые сообщения, которые вы отправляете, в текст и отправляет их обратно в чат.')
+        'Этот бот преобразует аудиозаписи и голосовые сообщения в текст.')
 
 
 @router.message(F.audio)
@@ -33,10 +33,6 @@ async def handle_audio(message: Message):
     file_on_disc = f"{getenv('file_path')}{str(message.message_id)}"
     await bot.download_file(file_path, file_on_disc)
     await message.reply(speech_recognition(file_on_disc))
-    try:
-        await remove(file_on_disc)
-    except Exception as ex:
-        print(ex)
 
 
 @router.message(F.voice)
@@ -47,7 +43,3 @@ async def handle_audio(message: Message):
     file_on_disc = f"{getenv('file_path')}{str(message.message_id)}"
     await bot.download_file(file_path, file_on_disc)
     await message.reply(speech_recognition(file_on_disc))
-    try:
-        await remove(file_on_disc)
-    except Exception as ex:
-        print(ex)
